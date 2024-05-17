@@ -1,0 +1,48 @@
+import random
+
+def draw_card():
+    return random.randint(0, 10)
+
+def perform_operation(card1, card2):
+    operations = ['+', '-', '*', '/']
+    operation = random.choice(operations)
+    
+    if operation == '+':
+        result = card1 + card2
+    elif operation == '-':
+        result = card1 - card2
+    elif operation == '*':
+        result = card1 * card2
+    elif operation == '/':
+        if card2 != 0:
+            result = card1 / card2
+        else:
+            result = 'undefined (division by zero)'
+    return operation, result
+
+def play_game():
+    player1_card1 = draw_card()
+    player1_card2 = draw_card()
+    player2_card1 = draw_card()
+    player2_card2 = draw_card()
+    
+    print("Player 1 draws:", player1_card1, "and", player1_card2)
+    print("Player 2 draws:", player2_card1, "and", player2_card2)
+    
+    player1_operation, player1_result = perform_operation(player1_card1, player1_card2)
+    player2_operation, player2_result = perform_operation(player2_card1, player2_card2)
+    
+    print(f"Player 1 performs: {player1_card1} {player1_operation} {player1_card2} = {player1_result}")
+    print(f"Player 2 performs: {player2_card1} {player2_operation} {player2_card2} = {player2_result}")
+    
+    if player1_result == 'undefined (division by zero)' or player2_result == 'undefined (division by zero)':
+        print("One of the results was undefined due to division by zero.")
+    else:
+        if player1_result > player2_result:
+            print("Player 1 wins!")
+        elif player2_result > player1_result:
+            print("Player 2 wins!")
+        else:
+            print("It's a tie!")
+
+play_game()
